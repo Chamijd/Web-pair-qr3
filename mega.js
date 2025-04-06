@@ -1,37 +1,31 @@
 const mega = require("megajs");
 
-// Define user credentials and user agent
 const credentials = {
   email: 'newab17760@noroasis.com',
   password: 'Chamindu2008',
-  userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"
+  userAgent: "MyApp/1.0"  // Simplified userAgent
 };
 
-// Upload function using mega.Storage
 const upload = (fileStream, fileName) => {
   return new Promise((resolve, reject) => {
-    try {
-      const storage = new mega.Storage(credentials, () => {
-        const options = {
-          name: fileName,
-          allowUploadBuffering: true
-        };
-        fileStream.pipe(storage.upload(options));
-        storage.on("add", file => {
-          file.link((error, link) => {
-            if (error) {
-              throw error;
-            }
-            storage.close();
-            resolve(link);
-          });
+    const storage = new mega.Storage(credentials);
+
+    storage.on("ready", () => {
+      const uploadStream = storage.upload({ name: fileName });
+      
+      uploadStream.on("complete", (file) => {
+        file.link((err, link) => {
+          if (err) reject(err);
+          else resolve(link);
         });
       });
-    } catch (error) {
-      reject(error);
-    }
+
+      uploadStream.on("error", (err) => reject(err));
+      fileStream.pipe(uploadStream);
+    });
+
+    storage.on("error", (err) => reject(err));
   });
 };
 
-// Export the upload function
 module.exports = { upload };
