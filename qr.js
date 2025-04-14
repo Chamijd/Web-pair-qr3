@@ -70,15 +70,15 @@ var randomItem = selectRandomItem(items);
                         const { upload } = require('./mega');
                         const mega_url = await upload(fs.createReadStream(rf), `${sock.user.id}.json`);
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
-                        let md = "LAKA-MD=" + string_session;
+                        let md = "CHAMA-MD=" + string_session;
                         let code = await sock.sendMessage(sock.user.id, { text: md });
-                        let desc = `> ශෙයා කරන්න එපා \n\n> ᴅᴏ ɴᴏᴛ ꜱʜᴇʀᴇ ᴛʜɪꜱ \n\n> இதை யாரிடமும் பகிர வேண்டாம்\n\n> ʀɪᴘᴏ https://github.com/lakaofc/laka-md\n\n> ᴏᴡɴᴇʀ 94781121579\n\n\n> ᴘᴏᴡᴇʀᴅ ʙʏ ʟᴀᴋᴀ - ᴍᴅ`;
+                        let desc = `> ශෙයා කරන්න එපා \n\n> ᴅᴏ ɴᴏᴛ ꜱʜᴇʀᴇ ᴛʜɪꜱ \n\n> இதை யாரிடமும் பகிர வேண்டாம்\n\n> ʀɪᴘᴏ https://github.com\n\nwhats app channel:-https://whatsapp.com/channel/0029Vb9WF4nJJhzeUCFS6M0u\n\n> ᴏᴡɴᴇʀ 94783314361\n\n\n> ᴘᴏᴡᴇʀᴅ ʙʏ chamindu- ᴍᴅ`;
                         await sock.sendMessage(sock.user.id, {
 text: desc,
 contextInfo: {
 externalAdReply: {
-title: "ʟᴀᴋᴀ-ᴍᴅ",
-thumbnailUrl: "https://i.ibb.co/3Fs4FJw/7777.jpg",
+title: "ᴄʜᴀᴍᴀ-ᴍᴅ",
+thumbnailUrl: "https://i.ibb.co/pjqsbyyW/7755.jpg",
 sourceUrl: "https://whatsapp.com/channel/0029Vb10Jv560eBfnX6Jaa3Y",
 mediaType: 1,
 renderLargerThumbnail: true
@@ -88,13 +88,13 @@ renderLargerThumbnail: true
 {quoted:code })
                     } catch (e) {
                             let ddd = sock.sendMessage(sock.user.id, { text: e });
-                            let desc = `> ශෙයා කරන්න එපා \n\n> ᴅᴏ ɴᴏᴛ ꜱʜᴇʀᴇ ᴛʜɪꜱ \n\n> இதை யாரிடமும் பகிர வேண்டாம்\n\n> ʀɪᴘᴏ https://github.com/lakaofc/laka-md\n\n> ᴏᴡɴᴇʀ 94781121579\n\n\n> ᴘᴏᴡᴇʀᴅ ʙʏ ʟᴀᴋᴀ - ᴍᴅ`;
+                            let desc = `> ශෙයා කරන්න එපා \n\n> ᴅᴏ ɴᴏᴛ ꜱʜᴇʀᴇ ᴛʜɪꜱ \n\n> இதை யாரிடமும் பகிர வேண்டாம்\n\n> ʀɪᴘᴏ https://github.com\n\nwhats app channel:-https://whatsapp.com/channel/0029Vb9WF4nJJhzeUCFS6M0u\n\n> ᴏᴡɴᴇʀ 94783314361\n\n\n> ᴘᴏᴡᴇʀᴅ ʙʏ chamindu- ᴍᴅ`;
                             await sock.sendMessage(sock.user.id, {
 text: desc,
 contextInfo: {
 externalAdReply: {
-title: "ʟᴀᴋᴀ-ᴍᴅ",
-thumbnailUrl: "https://i.ibb.co/3Fs4FJw/7777.jpg",
+title: "ᴄʜᴀᴍᴀ-ᴍᴅ",
+thumbnailUrl: "https://i.ibb.co/pjqsbyyW/7755.jpg",
 sourceUrl: "https://whatsapp.com/channel/0029Vb10Jv560eBfnX6Jaa3Y",
 mediaType: 2,
 renderLargerThumbnail: true,
