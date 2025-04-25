@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CHMA MD WhatsApp Bot</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 
   <style>
     * {
@@ -20,9 +20,14 @@
       color: #fff;
       overflow-x: hidden;
       background: #000;
+      transition: background 0.5s, color 0.5s;
     }
 
-    /* 🔥 Updated Animated Background with Neon Colors */
+    body.light-mode {
+      background: #f2f2f2;
+      color: #000;
+    }
+
     .background-waves {
       position: fixed;
       top: 0;
@@ -33,6 +38,7 @@
       background-size: 400% 400%;
       animation: waveAnim 15s infinite linear;
       opacity: 0.5;
+      z-index: -1;
     }
 
     @keyframes waveAnim {
@@ -43,14 +49,13 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* 💫 New Neon Spinner Loading Screen */
     #loading-screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.95);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -62,9 +67,21 @@
       width: 80px;
       height: 80px;
       border: 6px solid transparent;
-      border-top: 6px solid #ff0066;  /* Change color of spinner */
+      border-top: 6px solid #ff0066;
       border-radius: 50%;
       animation: spin 1s linear infinite;
+      position: relative;
+    }
+
+    .spinner::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 6px solid transparent;
+      border-bottom-color: #00ffcc;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
     }
 
     @keyframes spin {
@@ -73,24 +90,58 @@
     }
 
     .loading-text {
+      position: relative;
       margin-top: 20px;
-      font-size: 18px;
-      color: #ff0066; /* Change text color */
-      animation: pulse 1.5s infinite;
+      font-size: 20px;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 0 0 8px #ff0066;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
+    .loading-text::before {
+      content: "";
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      border: 4px solid #ff0066;
+      border-radius: 50%;
+      filter: blur(8px);
+      animation: glow 2s infinite ease-in-out;
+      z-index: -1;
     }
 
-    /* 🔹 Header Styles */
+    @keyframes glow {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.6; }
+    }
+
+    .progress-container {
+      width: 80%;
+      background-color: #444;
+      margin-top: 30px;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background-color: #ff0066;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      border-radius: 10px;
+    }
+
     header {
       padding: 20px;
       background: rgba(26, 26, 26, 0.9);
       text-align: center;
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      position: relative;
     }
 
     header h1 {
@@ -105,7 +156,19 @@
       margin-top: 5px;
     }
 
-    /* 🔹 New Square Buttons with Gradient Style */
+    body.light-mode header {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    body.light-mode header h1 {
+      color: #007777;
+      text-shadow: none;
+    }
+
+    body.light-mode .info {
+      color: #444;
+    }
+
     .button-container {
       display: flex;
       justify-content: center;
@@ -114,14 +177,14 @@
       margin: 40px 0;
       opacity: 0;
       animation: showButtons 2s forwards;
-      animation-delay: 5s; /* Delay to show after loading screen disappears */
+      animation-delay: 5s;
     }
 
     .button {
       padding: 20px 40px;
-      background: linear-gradient(45deg, #ff0000, #ff7300, #ffeb00, #00ff00, #00b3ff, #8a2be2, #ff00ff); /* Rainbow Gradient */
+      background: linear-gradient(45deg, #ff0000, #ff7300, #ffeb00, #00ff00, #00b3ff, #8a2be2, #ff00ff);
       color: #fff;
-      border: 2px solid #fff; /* White border to create a clear contrast */
+      border: 2px solid #fff;
       font-weight: bold;
       font-size: 18px;
       text-transform: uppercase;
@@ -133,19 +196,14 @@
       gap: 10px;
       background-size: 300% 300%;
       animation: gradientAnimation 5s ease infinite;
-      border-radius: 0px; /* Square edges instead of rounded */
+      border-radius: 0px;
+      text-decoration: none;
     }
 
     @keyframes gradientAnimation {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .button i {
@@ -168,29 +226,83 @@
       }
     }
 
-    /* 🔹 Footer */
     footer {
       padding: 15px;
       background: rgba(0, 0, 0, 0.9);
       text-align: center;
       color: #bbb;
     }
+
+    body.light-mode footer {
+      background: rgba(255, 255, 255, 0.9);
+      color: #555;
+    }
+
+    .mode-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 22px;
+      padding: 10px;
+      border: none;
+      background: #222;
+      color: #fff;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      z-index: 100;
+    }
+
+    .mode-toggle:hover {
+      background: #444;
+      transform: scale(1.1);
+    }
+
+    body.light-mode .mode-toggle {
+      background: #ddd;
+      color: #000;
+    }
+
+    body.light-mode .mode-toggle:hover {
+      background: #ccc;
+    }
   </style>
 
   <script>
     window.onload = function () {
       setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        fetchIPAndTime();
-      }, 5000);
+        startLoading();
+      }, 1000);
     };
+
+    function startLoading() {
+      let progress = 0;
+      const progressBar = document.getElementById('progress-bar');
+      const loadingScreen = document.getElementById('loading-screen');
+      const loadingText = document.getElementById('loading-text');
+      
+      const interval = setInterval(() => {
+        if (progress < 100) {
+          progress += Math.floor(Math.random() * 3) + 1;
+          if (progress > 100) progress = 100;
+          progressBar.style.width = `${progress}%`;
+          loadingText.innerHTML = `Loading... ${progress}%`;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            fetchIPAndTime();
+          }, 700);
+        }
+      }, 60);
+    }
 
     async function fetchIPAndTime() {
       try {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
         document.getElementById('ip-info').innerHTML = `IP Address: ${data.ip} | Country: ${data.country_name}`;
-
         setInterval(() => {
           const now = new Date();
           document.getElementById('time-info').innerHTML = `Current Time: ${now.toLocaleTimeString()}`;
@@ -199,21 +311,31 @@
         console.error('Error fetching IP:', error);
       }
     }
+
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+      const icon = document.getElementById('mode-toggle');
+      icon.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+    }
   </script>
 </head>
 
 <body>
   <div id="loading-screen">
     <div class="spinner"></div>
-    <div class="loading-text">Loading, Please Wait...</div>
+    <div class="loading-text" id="loading-text">Loading... 0%</div>
+    <div class="progress-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
   </div>
 
-  <div class="background-waves"></div> <!-- 🔥 Animated Background -->
+  <div class="background-waves"></div>
 
   <header>
-    <h1>CHMA MD WhatsApp Bot 🌟</h1>
+    <h1>CHMA MD WhatsApp Bot</h1>
     <div class="info" id="ip-info">Loading IP Address...</div>
     <div class="info" id="time-info">Loading Time...</div>
+    <button onclick="toggleMode()" id="mode-toggle" class="mode-toggle" title="Toggle Light/Dark Mode">🌙</button>
   </header>
 
   <div class="button-container">
